@@ -60,7 +60,7 @@
   --code-foreground: #e6ece8;
   --card: #ffffff;
   --card-foreground: #1b2520;
-  --popover: #ffffff; 
+  --popover: #ffffff;
   --popover-foreground: #1b2520;
   --primary: #168447;
   --primary-foreground: #ffffff;
@@ -139,10 +139,13 @@
 
   html {
     @apply font-sans;
+    /* เว้นที่ให้ header แบบ sticky (h-16 = 4rem) เวลาเลื่อนไปหา section */
+    scroll-padding-top: 4rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
-
-
-
-
- 

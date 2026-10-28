@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans, Noto_Sans_Thai, Geist } from "next/font/google";
+import { Noto_Sans, Noto_Sans_Thai, Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/layouts/Footer";
 import Header from "@/components/layouts/Header";
 import Container from "@/components/layouts/Container";
@@ -10,7 +10,7 @@ import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/common/theme/ThemeToggle";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 
 // const geistSans = Geist({
@@ -27,6 +27,7 @@ const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
   subsets: ["latin"],
 });
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' });
 
 const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
@@ -48,7 +49,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", notoSans.variable, notoSansThai.variable, "font-sans", geist.variable)}
+      data-scroll-behavior="smooth"
+      className={cn("h-full", "antialiased", notoSans.variable, notoSansThai.variable, "font-sans", geist.variable,geistMono.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background text-foreground">
@@ -73,7 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
             <Footer />
           </div>
-                    
+
           <ThemeToggle />
         </ThemeProvider>
       </body>

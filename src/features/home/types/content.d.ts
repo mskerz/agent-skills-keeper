@@ -3,3 +3,9 @@ export interface ContentItem{
     title:string
     description:string
 }
+
+
+export interface PreviewSkillItem extends ContentItem {
+    tags?:string[]
+    fileCount?: number
+}

@@ -1,19 +1,20 @@
-import Image from "next/image";
-import { HeroSection, HowItWorkSection, PainPointSection } from "@/features/home"
+import { HeroSection, HowItWorkSection, PainPointSection, ExplorePreviewSection, SectionWrapper } from "@/features/home"
 
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col w-full min-h-screen ">
+    <div data-snap-page className="flex flex-col w-full min-h-screen ">
       <HeroSection />
+
 
       <PainPointSection />
 
-      <HowItWorkSection/>
+      <HowItWorkSection />
+
+      <ExplorePreviewSection />
 
 
 
-
-    </div>
+    </div >
   );
 }

@@ -4,6 +4,7 @@ declare global {
     interface BaseProps {
         id?: string;
         className?: string;
+        label?:string
     }
 
     interface ReactNodeProps extends BaseProps {

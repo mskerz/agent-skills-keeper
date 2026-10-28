@@ -5,8 +5,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ContentItem } from '../../types/content'
+import { HOME_SECTIONS } from '../../constants/sections'
+import { cn } from '@/lib/utils'
+import ScreenSection from '../common/ScreenSection'
 
-const painPoints  :ContentItem[] = [
+const painPoints: ContentItem[] = [
   {
     id: 1,
     title: 'Scattered everywhere',
@@ -22,18 +25,18 @@ const painPoints  :ContentItem[] = [
     title: 'Hard to reuse',
     description: "Found a great skill? You can't just make it yours.",
   },
-] 
+]
 
-export default function PainPointSection() {
+export default function PainPointSection({ id = HOME_SECTIONS.why.id, className }: BaseProps) {
   return (
-    <section
-      className="relative overflow-hidden"
+   <ScreenSection
+      id={id}
+      className={cn('relative overflow-hidden', className)}
       aria-labelledby="pain-point-heading"
     >
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="container mx-auto px-4">
         {/* Heading */}
         <h2
-          id="pain-point-heading"
           className="text-3xl font-semibold tracking-tight leading-tight md:text-[56px]"
         >
           Your skills deserve a home.
@@ -51,6 +54,6 @@ export default function PainPointSection() {
           ))}
         </div>
       </div>
-    </section>
+    </ScreenSection>
   )
 }
