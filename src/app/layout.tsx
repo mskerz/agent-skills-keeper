@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { Noto_Sans, Noto_Sans_Thai, Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/layouts/Footer";
 import Header from "@/components/layouts/Header";
-import Container from "@/components/layouts/Container";
 import ClientLayout from "@/components/common/ClientLayoutWrapper";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/common/theme/ThemeToggle";
+import { Toaster } from "@/components/ui/toast"
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -37,20 +37,22 @@ const notoSansThai = Noto_Sans_Thai({
 
 export const metadata: Metadata = {
   title: {
-    default: "SKILLS KEEPER",
-    template: "%s | SKILLS KEEPER",
+    default: "$KILLS KEEPER",
+    template: "%s | $KILLS KEEPER",
   }
-
   ,
   description: "Keep your agent skills up to date with $kills Keeper",
 };
+
+
+
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={cn("h-full", "antialiased", notoSans.variable, notoSansThai.variable, "font-sans", geist.variable,geistMono.variable)}
+      className={cn("h-full", "antialiased", notoSans.variable, notoSansThai.variable, "font-sans", geist.variable, geistMono.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background text-foreground">
@@ -60,23 +62,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            <Suspense
-              fallback={<header className="h-16" />}
-            >
-              <Header />
-            </Suspense>
-
-            <main className="flex-1">
-              <ClientLayout>
-                {children}
-              </ClientLayout>
-            </main>
-
-            <Footer />
-          </div>
-
-          <ThemeToggle />
+            {children}
+            <Toaster />
         </ThemeProvider>
       </body>
     </html>

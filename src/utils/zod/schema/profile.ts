@@ -2,7 +2,7 @@ import { z } from "@/utils/zod"
 import type { UpdateProfile } from "@/features/auth/types/auth"
 
 // ฟอร์มส่งช่องว่างมาเป็น "" แต่คอลัมน์ใน DB เป็น null
-const optionalText = (max: number) =>
+export const optionalText = (max: number) =>
   z
     .string()
     .trim()
