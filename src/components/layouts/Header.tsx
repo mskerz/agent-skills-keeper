@@ -2,9 +2,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Container from "./Container";
 import ThemeLogo from "../common/theme/ThemeLogo";
-import { createClient } from "@/utils/supabase/server";
 import { homeNavItems } from "@/features/home/constants/sections";
 import SectionNav from "./SectionNav";
+import { Suspense } from "react";
+import { UserMenu } from "@/features/user";
+import { Skeleton } from "../ui/skeleton";
 
 // const navItems = [
 //   { href: "/#explore", label: "Explore" },
@@ -13,12 +15,7 @@ import SectionNav from "./SectionNav";
 // ];
 
 export default async function Header() {
-  // 1. สร้าง Supabase Client ฝั่ง Server
-  const supabase = await createClient();
-  // 2. ใช้ await เช็คสิทธิ์ผู้ใช้งานปัจจุบัน (ดึงข้อมูลมาจาก Session คุกกี้)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+
 
   return (
     <header className="sticky top-0 z-50 bg-background backdrop-blur">
@@ -29,29 +26,16 @@ export default async function Header() {
 
         <SectionNav items={homeNavItems} className="hidden md:flex" />
 
-        <div className="flex items-center gap-4">
-          {user ? (
-            <Button variant="ghost">{user.email}</Button>
-          ) : (
-            <>
-              <Button
-                variant="ghost"
-                nativeButton={false}
-                render={<Link href="/auth/login" />}
-              >
-                Sign In
-              </Button>
-              <Button
-                size="lg"
-                className="rounded-md px-3"
-                nativeButton={false}
-                render={<Link href="/auth/register" />}
-              >
-                Get Started
-              </Button>
-            </>
-          )}
-        </div>
+        <Suspense
+          fallback={
+            <div className="flex items-center gap-4">
+              <Skeleton className="h-9 w-20 rounded-md" />
+              <Skeleton className="h-10 w-28 rounded-md" />
+            </div>
+          }
+        >
+          <UserMenu />
+        </Suspense>
       </Container>
     </header>
   );

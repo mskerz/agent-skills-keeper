@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "src/components/layouts/Container.tsx"  ],
+, "src/components/layouts/Container.tsx", "src/features/auth/actions/auth-session.ts"  ],
   "exclude": ["node_modules"]
 }
