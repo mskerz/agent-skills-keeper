@@ -7,9 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { LoginForm, signInWithEmail } from "@/features/auth";
 
 export default function LoginPage() {
   return (
@@ -25,29 +23,7 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent className="grid gap-4 px-0">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="name@example.com"
-              autoComplete="email"
-            />
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
-
-          <Button type="button" className="mt-2 w-full">
-            Sign In
-          </Button>
+          <LoginForm action={signInWithEmail} />
         </CardContent>
 
         <CardFooter className="flex justify-center border-t-0 bg-transparent px-0 pt-2 text-center text-sm text-muted-foreground">

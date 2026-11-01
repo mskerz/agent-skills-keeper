@@ -1,13 +1,14 @@
 "use server";
 
 
-import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { revalidatePath } from "next/cache";
+import { actionError, actionSuccess } from "@/utils/response";
 
 export async function signOut() {
   const supabase = await createClient();
-  await supabase.auth.signOut();
-  revalidatePath("/", "layout"); // <-- เพิ่มบรรทัดนี้
-  redirect("/auth/login");
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    return actionError("ออกจากระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง");
+  }
+  return actionSuccess("ออกจากระบบเรียบร้อยแล้ว");
 }

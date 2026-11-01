@@ -1,24 +1,19 @@
 import React from 'react'
 
 import { Button } from '@/components/ui/button';
-import { createClient } from '@/utils/supabase/server';
 import { connection } from 'next/server';
 import UserDropdown from './UserDropdown';
 import Link from 'next/link';
-import { getUser } from '@/features/auth';
+import { getUser } from '@/features/auth/services';
 
 export default async function UserMenu() {
-  //  
-  await connection()
-  //  เรียก services getUser
-  const { user, isLoggedIn } = await getUser();
-
+  await connection();
+  const state = await getUser();
 
   return (
     <div className='flex items-center gap-4'>
-      {user && isLoggedIn ? (
-        <UserDropdown user={user} />
-
+      {state.isLoggedIn  ? (
+        <UserDropdown user={state.profile} email={state.user.email} />
       ) : (
         <>
           <Button
@@ -39,5 +34,5 @@ export default async function UserMenu() {
         </>
       )}
     </div>
-  )
+  );
 }

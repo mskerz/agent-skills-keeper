@@ -1,5 +1,18 @@
 import { z } from "@/utils/zod";
 
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "กรุณากรอกอีเมล")
+    .email("รูปแบบอีเมลไม่ถูกต้อง")
+    .transform((val) => val.toLowerCase()),
+  password: z
+    .string()
+    .min(6, "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร")
+    .max(72, "รหัสผ่านต้องไม่เกิน 72 ตัวอักษร"),
+})
+
 export const registerSchema = z
   .object({
     displayName: z
@@ -29,3 +42,6 @@ export const registerSchema = z
 
 export type RegisterFormInput = z.input<typeof registerSchema>;
 export type RegisterFormData = z.output<typeof registerSchema>;
+
+export type LoginFormInput  = z.input<typeof loginSchema>;
+export type LoginFormData  = z.output<typeof loginSchema>;

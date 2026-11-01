@@ -68,6 +68,6 @@ export async function signUp(
     if (data.user && (!data.user.identities || data.user.identities.length === 0)) {
         return actionError("อีเมลนี้ถูกใช้งานแล้ว", undefined, preservedValues);
     }
-
+   
     return actionSuccess("สร้างบัญชีผู้ใช้งานเรียบร้อยแล้ว");
 }

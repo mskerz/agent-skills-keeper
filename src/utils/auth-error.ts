@@ -33,7 +33,10 @@ export function getAuthErrorMessage(error: unknown): string {
     case "validation_failed":
       return "ข้อมูลที่กรอกไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง";
 
+    case "invalid_credentials":
+      return "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
+
     default:
-      return "ไม่สามารถสมัครสมาชิกได้ กรุณาลองใหม่อีกครั้ง";
+      return "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง";
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useActionState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/common/button/ActionButton";
 import { Input } from "@/components/ui/input";
 import {
   FieldSet,
@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { RegisterFormInput } from "@/utils/zod/schema";
-import { Spinner } from "@/components/ui/spinner";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 export const initialState: FormState<RegisterFormInput> = {
   errors: {},
@@ -22,8 +21,7 @@ export const initialState: FormState<RegisterFormInput> = {
 
 function RegisterForm({ action }: FormProps<RegisterFormInput>) {
   const [state, formAction, pending] = useActionState(action, initialState);
-  const router = useRouter();
-
+ 
   useEffect(() => {
     if (!state?.message) return;
 
@@ -33,7 +31,7 @@ function RegisterForm({ action }: FormProps<RegisterFormInput>) {
         title: "ลงทะเบียนสำเร็จ",
         description: state.message,
       });
-      router.push("/auth/login");
+      window.location.href = "/";
     } else {
       toast.add({
         type: "error",
@@ -41,7 +39,7 @@ function RegisterForm({ action }: FormProps<RegisterFormInput>) {
         description: state.message,
       });
     }
-  }, [state, router]);
+  }, [state]);
 
   return (
     <form action={formAction}>
@@ -111,16 +109,13 @@ function RegisterForm({ action }: FormProps<RegisterFormInput>) {
               <FieldError>{state.errors.confirmPassword[0]}</FieldError>}
           </Field>
 
-          <Button type="submit" disabled={pending} className="mt-2 w-full">
-            {pending ? (
-              <>
-                <Spinner data-icon="inline-start" />
-                Signing up...
-              </>
-            ) : (
-              "Sign Up"
-            )}
-          </Button>
+          <SubmitButton
+            pending={pending}
+            pendingText="Signing up..."
+            className="mt-2 w-full"
+          >
+            Sign Up
+          </SubmitButton>
         </FieldGroup>
       </FieldSet>
     </form>
