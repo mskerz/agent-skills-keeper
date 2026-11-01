@@ -1,0 +1,41 @@
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { LoginForm, signInWithEmail } from "@/features/auth";
+
+export default function LoginPage() {
+  return (
+    <div className="flex min-h-[calc(100vh-14rem)] items-center justify-center">
+      <Card className="w-full max-w-sm border-0 bg-transparent shadow-none ring-0">
+        <CardHeader className="space-y-1.5 px-0 text-center sm:text-left">
+          <CardTitle className="text-2xl font-semibold tracking-tight">
+            Welcome back
+          </CardTitle>
+          <CardDescription className="text-sm text-muted-foreground">
+            Enter your credentials to access your account
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="grid gap-4 px-0">
+          <LoginForm action={signInWithEmail} />
+        </CardContent>
+
+        <CardFooter className="flex justify-center border-t-0 bg-transparent px-0 pt-2 text-center text-sm text-muted-foreground">
+          Don&apos;t have an account?{" "}
+          <Link
+            href="/auth/register"
+            className="ml-1 font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            Sign up
+          </Link>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
