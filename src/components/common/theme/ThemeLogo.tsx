@@ -6,6 +6,7 @@ import logoDark from '../../../../public/skill-keeper-dark.svg'
 import logoLight from '../../../../public/skill-keeper-light.svg'
 
 function ThemeLogo() {
+ 
 
 
   return (

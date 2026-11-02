@@ -1,0 +1,1 @@
+export { default as ThemeLogoWithCollapse } from './ThemeLogoWithCollapse'

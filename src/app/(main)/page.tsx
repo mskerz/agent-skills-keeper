@@ -1,4 +1,4 @@
-import { HeroSection, HowItWorkSection, PainPointSection, ExplorePreviewSection, SectionWrapper } from "@/features/home"
+import { HeroSection, HowItWorkSection, PainPointSection, ExplorePreviewSection, ClosingCtaSection } from "@/features/home"
 
 
 export default function HomePage() {
@@ -12,6 +12,9 @@ export default function HomePage() {
       <HowItWorkSection />
 
       <ExplorePreviewSection />
+
+      <ClosingCtaSection />
+
 
 
 

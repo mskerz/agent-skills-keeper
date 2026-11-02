@@ -16,6 +16,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import type { Profile } from "@/features/auth/types/auth";
 import { ChevronDown, LogOut, User as UserIcon } from "lucide-react";
 import { toast } from "@/components/ui/toast";
+import { usePathname } from "next/navigation";
+import { PUBLIC_ROUTES } from "@/constants/app";
+import Link from "next/link";
 
 type UserDropdownProps = {
   user: Profile | null;
@@ -24,6 +27,7 @@ type UserDropdownProps = {
 
 export default function UserDropdown({ user, email }: UserDropdownProps) {
   const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
   const displayName = user?.display_name?.trim() || "User";
   const initials =
     displayName
@@ -76,7 +80,10 @@ export default function UserDropdown({ user, email }: UserDropdownProps) {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem disabled className=" gap-2">
+          <DropdownMenuItem
+            className="cursor-pointer gap-2"
+            render={<Link href="/app/profile" />}
+          >
             <UserIcon className="size-4 text-muted-foreground" />
             <span>Profile</span>
           </DropdownMenuItem>
@@ -97,8 +104,15 @@ export default function UserDropdown({ user, email }: UserDropdownProps) {
                     title: "ออกจากระบบสำเร็จ",
                     description: result.message,
                   });
-                  // พาไปหน้า Login พร้อมเคลียร์ session ทั้งหมด
-                  window.location.href = "/auth/login";
+
+                  // ถ้าหน้าปัจจุบันเป็น Public Route (เช่น "/") ให้อยู่หน้าเดิมและรีเฟรชแค่ Header
+                  // แต่ถ้าเป็น Protected Route ให้เตะไปหน้า login
+                  const isPublic = PUBLIC_ROUTES.includes(pathname);
+                  if (isPublic) {
+                    window.location.reload();
+                  } else {
+                    window.location.href = "/auth/login";
+                  }
                 } else {
                   toast.add({
                     type: "error",

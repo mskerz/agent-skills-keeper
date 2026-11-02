@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Container from "./Container";
 import ThemeLogo from "../common/theme/ThemeLogo";
 import { homeNavItems } from "@/features/home/constants/sections";

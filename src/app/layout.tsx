@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans, Noto_Sans_Thai, Geist, Geist_Mono } from "next/font/google";
-import Footer from "@/components/layouts/Footer";
-import Header from "@/components/layouts/Header";
-import ClientLayout from "@/components/common/ClientLayoutWrapper";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { Suspense } from "react";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/common/theme/ThemeToggle";
 import { Toaster } from "@/components/ui/toast"
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });

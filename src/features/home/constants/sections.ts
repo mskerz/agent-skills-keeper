@@ -6,6 +6,7 @@ export const HOME_SECTIONS = {
   why: { id: 'why', label: 'Why' },
   howItWorks: { id: 'how-it-works', label: 'How it works' },
   explore: { id: 'explore', label: 'Explore' },
+  closing_cta: { id: 'closing-cta', label: 'Closing CTA' },
   
 } as const satisfies Record<string, SectionMeta>
 

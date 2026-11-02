@@ -4,13 +4,20 @@ import * as React from "react"
 import { useTheme } from "next-themes"
 import { Sun, Moon } from "lucide-react"
 
+
+// subscribe เปล่าๆ ไม่ต้องทำอะไร
+const emptySubscribe = () => () => {}
+
+
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  // คืนค่า true เมื่ออยู่บน Client และ false เมื่ออยู่บน Server
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  )
 
   if (!mounted) return null
 

@@ -80,10 +80,10 @@ export default function SectionNav({ items, id, className }: SectionNavProps) {
         // ไฮไลต์เฉพาะหน้า Home เท่านั้น หน้าอื่นไม่มี section เหล่านี้
         const sections = pathname === '/' ? findSections(ids) : []
 
-        if (sections.length === 0) {
-            setActive(null)
-            return
-        }
+if (sections.length === 0) {
+    queueMicrotask(() => setActive(null))
+    return
+}
 
         // เริ่มสังเกต และคืน cleanup ให้ React เรียกเมื่อ unmount หรือ dependency เปลี่ยน
         return observeActiveSection(sections, ids, setActive)
