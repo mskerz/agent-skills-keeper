@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/field";
 import { toast } from "@/components/ui/toast";
 import { RegisterFormInput } from "@/utils/zod/schema";
+import { useRouter } from "next/navigation";
 // import { useRouter } from "next/navigation";
 
 export const initialState: FormState<RegisterFormInput> = {
@@ -21,7 +22,7 @@ export const initialState: FormState<RegisterFormInput> = {
 
 function RegisterForm({ action }: FormProps<RegisterFormInput>) {
   const [state, formAction, pending] = useActionState(action, initialState);
- 
+  const router = useRouter(); // 👈 เพิ่มบรรทัดนี้
   useEffect(() => {
     if (!state?.message) return;
 
@@ -31,7 +32,8 @@ function RegisterForm({ action }: FormProps<RegisterFormInput>) {
         title: "ลงทะเบียนสำเร็จ",
         description: state.message,
       });
-      window.location.href = "/";
+      router.push("/app"); // 👈 หรือ "/" ตาม flow ที่ต้องการ
+      router.refresh();
     } else {
       toast.add({
         type: "error",
@@ -81,7 +83,7 @@ function RegisterForm({ action }: FormProps<RegisterFormInput>) {
           <Field>
             <FieldLabel htmlFor="password">Password</FieldLabel>
             <Input
-            
+
               id="password"
               name="password"
               type="password"

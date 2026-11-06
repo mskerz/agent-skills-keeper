@@ -4,7 +4,7 @@ import ThemeLogo from "../common/theme/ThemeLogo";
 import { homeNavItems } from "@/features/home/constants/sections";
 import SectionNav from "./SectionNav";
 import { Suspense } from "react";
-import { UserMenu } from "@/features/user";
+import {  UserNavigator } from "@/features/user";
 import { Skeleton } from "../ui/skeleton";
 
 // const navItems = [
@@ -28,12 +28,12 @@ export default async function Header() {
         <Suspense
           fallback={
             <div className="flex items-center gap-4">
-              <Skeleton className="h-9 w-20 rounded-md" />
+              {/* <Skeleton className="h-9 w-20 rounded-md" /> */}
               <Skeleton className="h-10 w-28 rounded-md" />
             </div>
           }
         >
-          <UserMenu />
+          <UserNavigator />
         </Suspense>
       </Container>
     </header>

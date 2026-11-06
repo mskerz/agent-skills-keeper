@@ -9,24 +9,27 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from '@/components/ui/sidebar'
 import Link from 'next/link'
-import { LayoutDashboard, Sparkles, User, LogOut } from 'lucide-react'
-import React from 'react'
+import { Compass, LibraryBig } from 'lucide-react'
+import React, { Suspense } from 'react'
 import { ThemeLogoWithCollapse } from '../common'
+import { Skeleton } from '@/components/ui/skeleton'
+import UserMenu from '../UserMenu'
+import { Separator } from '@/components/ui/separator'
 
 const navItems = [
-  { title: 'Explore', href: '/app', icon: LayoutDashboard },
-  { title: 'Skills', href: '/app/skills', icon: Sparkles },
-  { title: 'Profile', href: '/app/profile', icon: User },
+  { title: 'My Skills', href: '/app/skills', icon: LibraryBig },
+  { title: 'Explore', href: '/app/explore', icon: Compass },
 ]
 
 export default function AppUserSidebar() {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon"   >
       {/* 1. Header ของ Sidebar: โลโก้แอปที่คลิกกลับหน้าแรกได้ */}
-      <SidebarHeader className="border-b border-sidebar-border p-4">
-        <Link href="/" className="flex items-center gap-2">
+      <SidebarHeader className=" border-sidebar-border ">
+        <Link href="/app" className="flex   gap-2">
           <ThemeLogoWithCollapse />
         </Link>
       </SidebarHeader>
@@ -34,17 +37,18 @@ export default function AppUserSidebar() {
       {/* 2. Content: รายการเมนูหลัก */}
       <SidebarContent >
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          {/* <SidebarGroupLabel>Menu</SidebarGroupLabel> */}
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     tooltip={item.title}
+                    className="data-hover:bg-primary-foreground/10"
                     render={<Link href={item.href} />}
                   >
                     <item.icon className="size-4 shrink-0" />
-                    <span>{item.title}</span> 
+                    <span>{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -54,15 +58,31 @@ export default function AppUserSidebar() {
       </SidebarContent>
 
       {/* 3. Footer: ปุ่มลัดหรือกลับหน้าเว็บ */}
-      <SidebarFooter className="border-t border-sidebar-border p-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton render={<Link href="/" />}>
-              <LogOut className="size-4 rotate-180" />
-              <span>Back to Website</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarFooter className="  border-sidebar-border  ">
+       
+          <SidebarSeparator className="my-1" />
+
+
+
+
+ 
+            <SidebarMenu>
+              <SidebarMenuItem className="w-full">
+                <Suspense
+                  fallback={
+                    <div className="flex items-center gap-2 p-1">
+                      <Skeleton className="size-7 rounded-full shrink-0" />
+                      <Skeleton className="h-4 w-28 rounded-md group-data-[collapsible=icon]:hidden" />
+                    </div>
+                  }
+                >
+                  <UserMenu />
+                </Suspense>
+              </SidebarMenuItem>
+            </SidebarMenu>
+           
+      
+
       </SidebarFooter>
     </Sidebar>
   )

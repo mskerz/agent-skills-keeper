@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LoginForm, signInWithEmail } from "@/features/auth";
+import { LoginForm, LoginFormSkeleton, signInWithEmail } from "@/features/auth";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
@@ -23,7 +24,9 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent className="grid gap-4 px-0">
-          <LoginForm action={signInWithEmail} />
+          <Suspense fallback={<LoginFormSkeleton />}>
+            <LoginForm action={signInWithEmail} />
+          </Suspense>
         </CardContent>
 
         <CardFooter className="flex justify-center border-t-0 bg-transparent px-0 pt-2 text-center text-sm text-muted-foreground">

@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
@@ -43,12 +44,25 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  nativeButton,
+  render,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+  // เมื่อส่ง render มาเป็น component อื่นที่ไม่ใช่ native <button> (เช่น Next.js <Link /> หรือ <a>)
+  // ให้ปรับ nativeButton เป็น false อัตโนมัติ เพื่อป้องกัน console warning ของ Base UI
+  const resolvedNativeButton =
+    nativeButton ??
+    (render
+      ? typeof render === "function" ||
+        (React.isValidElement(render) && render.type === "button")
+      : undefined)
+
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      nativeButton={resolvedNativeButton}
+      render={render}
       {...props}
     />
   )

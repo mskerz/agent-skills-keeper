@@ -32,11 +32,11 @@ const notoSansThai = Noto_Sans_Thai({
 
 export const metadata: Metadata = {
   title: {
-    default: "$KILLS KEEPER",
-    template: "%s | $KILLS KEEPER",
+    default: "Keepr - Vault for Your Skills",
+    template: "%s | Keepr",
   }
   ,
-  description: "Keep your agent skills up to date with $kills Keeper",
+  description: "Keep your agent skills up to date with Keepr",
 };
 
 

@@ -12,15 +12,20 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
 import { LoginFormInput } from "@/utils/zod/schema";
 import { SubmitButton } from "@/components/common/button/ActionButton";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export const initialState: FormState<LoginFormInput> = {
   errors: {},
   message: "",
 };
 
+
 function LoginForm({ action }: FormProps<LoginFormInput>) {
   const [state, formAction, pending] = useActionState(action, initialState);
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const raw = searchParams.get("next");
+  const nextUrl = raw && raw.startsWith("/") && !raw.startsWith("//") && !raw.includes("\\") ? raw : "/app";
   useEffect(() => {
     if (!state?.message) return;
 
@@ -30,8 +35,9 @@ function LoginForm({ action }: FormProps<LoginFormInput>) {
         title: "เข้าสู่ระบบสำเร็จ",
         description: state.message,
       });
-      // สั่งเปลี่ยนหน้าแบบ hard navigate เพื่อให้ session ใหม่โหลดเข้า Header ทันที
-      window.location.href = "/";
+       
+      router.push(nextUrl);
+      router.refresh();
     } else {
       toast.add({
         type: "error",
@@ -39,8 +45,7 @@ function LoginForm({ action }: FormProps<LoginFormInput>) {
         description: state.message,
       });
     }
-  }, [state]);
-
+  }, [state, router, nextUrl]); 
   return (
     <form action={formAction}>
       <FieldSet disabled={pending}>

@@ -29,7 +29,8 @@ export default function MainLayout({ children }: ReactNodeProps) {
                 </Suspense>
             </div>
 
-            <ThemeToggle />
+            {/* Floating theme toggle for landing page */}
+            <ThemeToggle variant="fixed" placement="bottom-right" />
         </>
     );
 }

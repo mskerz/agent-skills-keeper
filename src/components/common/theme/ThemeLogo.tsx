@@ -2,25 +2,26 @@
 
 import Image from 'next/image'
 import React from 'react'
-import logoDark from '../../../../public/skill-keeper-dark.svg'
-import logoLight from '../../../../public/skill-keeper-light.svg'
+
+import { LOGO_SYSTEM } from "@/constants/app"
 
 function ThemeLogo() {
- 
-
-
   return (
-    <div className="relative w-40 ">
+    <div className="relative w-25">
       <Image
-        src={logoLight}
+        src={LOGO_SYSTEM.light.app}
         alt="Skills Keeper Logo"
+        width={100}
+        height={25}
         priority
         className="h-full w-full dark:hidden"
       />
 
       <Image
-        src={logoDark}
+        src={LOGO_SYSTEM.dark.app}
         alt="Skills Keeper Logo"
+        width={100}
+        height={25}
         priority
         className="hidden h-full w-full dark:block"
       />
